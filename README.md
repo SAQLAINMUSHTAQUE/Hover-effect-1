@@ -1,6 +1,6 @@
-# 🎨 Portfolio Hover Cards
+# 🎨 Hover Cards
 
-Clean and interactive hover cards for showcasing portfolio projects.
+Clean and interactive hover cards for showcasing in your projects.
 
 ## 🌟 Features
 - Smooth hover animations
@@ -21,4 +21,4 @@ Clean and interactive hover cards for showcasing portfolio projects.
 ## 📄 License
 MIT — Free to use with attribution.
 
-> Designed by [Saqlain Mushtaque](https://github.com/your-username)
+> Designed by Saqlain Mushtaque and his partner ChatGPT.
