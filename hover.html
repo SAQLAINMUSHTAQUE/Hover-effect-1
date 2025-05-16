@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interactive 3D Hover Effect</title>
+  <style>
+    body {
+      background: #121212;
+      color: #f0f0f0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      user-select: none;
+    }
+
+    .project-card {
+      background-color: #1f1f1f;
+      padding: 2em;
+      border-radius: 16px;
+      width: 320px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.9);
+      transition: box-shadow 0.3s ease;
+      perspective: 1200px;
+      transform-style: preserve-3d;
+      animation: fadeIn 1s ease forwards;
+      will-change: transform;
+    }
+
+    .project-card h3 {
+      color: #ffcc00;
+      margin: 0 0 1em 0;
+      text-align: center;
+      text-shadow: 0 0 8px #ffcc00;
+    }
+
+    .project-card p {
+      color: #ddd;
+      margin: 0 0 1.5em 0;
+      text-align: center;
+      font-size: 1.1em;
+      line-height: 1.4;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 0.75em 0;
+      margin: 0.5em 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.15em;
+      font-weight: 700;
+      color: #121212;
+      background: linear-gradient(145deg, #ffd500, #e6b800);
+      box-shadow: 0 8px 15px rgba(255, 213, 0, 0.8);
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      perspective: 800px;
+      transform-style: preserve-3d;
+      position: relative;
+      user-select: none;
+    }
+
+    .btn:hover {
+      transform: translateZ(25px) scale(1.07);
+      box-shadow: 0 15px 30px rgba(255, 213, 0, 1);
+    }
+
+    .btn:active {
+      transform: translateZ(7px) scale(0.95);
+      box-shadow: 0 5px 10px rgba(255, 213, 0, 0.5);
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+  <div class="project-card" id="projectCard">
+    <h3>Interactive Hover Card</h3>
+    <p>Move your mouse over the card to see it follow your cursor.</p>
+    <button class="btn">Primary Action</button>
+    <button class="btn">Secondary Action</button>
+  </div>
+
+  <script>
+    const card = document.getElementById('projectCard');
+
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left; // x position within the element
+      const y = e.clientY - rect.top;  // y position within the element
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * 12; // Max 12 deg rotation
+      const rotateY = ((x - centerX) / centerX) * 12;
+
+      card.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(1.1)`;
+      card.style.boxShadow = `${-rotateY * 2}px ${rotateX * 2}px 30px rgba(255, 213, 0, 0.7)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+      card.style.boxShadow = '0 0 20px rgba(0,0,0,0.9)';
+    });
+  </script>
+</body>
+</html>
